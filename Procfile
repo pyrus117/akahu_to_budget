@@ -1,1 +1,1 @@
-web: sh -c "cd akahu_to_budget && uvicorn app:app --host 0.0.0.0 --port $PORT"
+web: sh -c "export PYTHONPATH=$PWD && python -m uvicorn akahu_to_budget.app:app --host 0.0.0.0 --port $PORT"
