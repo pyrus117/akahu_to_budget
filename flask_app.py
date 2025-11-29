@@ -45,7 +45,6 @@ def get_actual_client():
                 base_url=ENVs['ACTUAL_SERVER_URL'],
                 password=ENVs['ACTUAL_PASSWORD'],
                 file=ENVs['ACTUAL_SYNC_ID'],
-                encryption_password=ENVs['ACTUAL_ENCRYPTION_KEY']
             ) as client:
                 logging.info(f"Connected to AB: {client}")
                 yield client
