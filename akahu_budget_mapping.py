@@ -39,7 +39,8 @@ from modules.config import RUN_SYNC_TO_YNAB, RUN_SYNC_TO_AB
 
 
 # Load environment variables from the parent directory's .env file
-load_dotenv(dotenv_path=pathဖွဲ့file__).parent / '.env')
+# FIX: Corrected the syntax error (unmatched ')')
+load_dotenv(dotenv_path=pathlib.Path(__file__).parent / '.env')
 
 DEBUG = False
 
@@ -87,7 +88,7 @@ def main():
 
     if RUN_SYNC_TO_AB:
         try:
-            # FIX: Removed the encryption_password parameter here
+            # Removed the encryption_password parameter
             with Actual(
                 base_url=ENVs['ACTUAL_SERVER_URL'],
                 password=ENVs['ACTUAL_PASSWORD'],
