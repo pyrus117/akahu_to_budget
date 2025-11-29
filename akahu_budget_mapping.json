@@ -1,0 +1,201 @@
+{
+    "akahu_accounts": {
+        "acc_cmboqdbat000408l1crwahx9i": {
+            "id": "acc_cmboqdbat000408l1crwahx9i",
+            "_authorisation": "authorisation_cmboqbqkx000408l4dhdx5tum",
+            "_credentials": "creds_cmboqbqkx000408l4dhdx5tum",
+            "connection": "ASB",
+            "name": "Emergency savings",
+            "formatted_account": "12-3274-0362838-51",
+            "status": "ACTIVE",
+            "type": "CHECKING",
+            "attributes": [
+                "TRANSACTIONS",
+                "PAYMENT_TO",
+                "PAYMENT_FROM",
+                "TRANSFER_TO",
+                "TRANSFER_FROM"
+            ],
+            "balance": {
+                "currency": "NZD",
+                "current": 0,
+                "available": 0,
+                "overdrawn": false
+            },
+            "meta": {
+                "holder": "MR N L FARROW"
+            },
+            "refreshed": {
+                "balance": "2025-11-29T03:46:38.586Z",
+                "meta": "2025-11-29T03:46:38.586Z",
+                "transactions": "2025-11-29T03:46:42.005Z",
+                "party": "2025-11-09T05:46:24.205Z"
+            },
+            "date_first_loaded": "2025-11-29T19:13:59.169323"
+        },
+        "acc_cmboqdbat000508l14eos78wg": {
+            "id": "acc_cmboqdbat000508l14eos78wg",
+            "_authorisation": "authorisation_cmboqbqkx000408l4dhdx5tum",
+            "_credentials": "creds_cmboqbqkx000408l4dhdx5tum",
+            "connection": "ASB",
+            "name": "Goal savings",
+            "formatted_account": "12-3274-0362838-50",
+            "status": "ACTIVE",
+            "type": "CHECKING",
+            "attributes": [
+                "TRANSACTIONS",
+                "PAYMENT_TO",
+                "PAYMENT_FROM",
+                "TRANSFER_TO",
+                "TRANSFER_FROM"
+            ],
+            "balance": {
+                "currency": "NZD",
+                "current": 0,
+                "available": 0,
+                "overdrawn": false
+            },
+            "meta": {
+                "holder": "MR N L FARROW"
+            },
+            "refreshed": {
+                "balance": "2025-11-29T03:46:38.577Z",
+                "meta": "2025-11-29T03:46:38.577Z",
+                "transactions": "2025-11-29T03:46:42.005Z",
+                "party": "2025-11-09T05:46:24.205Z"
+            },
+            "date_first_loaded": "2025-11-29T19:13:59.169323"
+        },
+        "acc_cmboqdbar000308l1hfja9drt": {
+            "id": "acc_cmboqdbar000308l1hfja9drt",
+            "_authorisation": "authorisation_cmboqbqkx000408l4dhdx5tum",
+            "_credentials": "creds_cmboqbqkx000408l4dhdx5tum",
+            "connection": "ASB",
+            "name": "Personal",
+            "formatted_account": "12-3274-0362838-00",
+            "status": "ACTIVE",
+            "type": "CHECKING",
+            "attributes": [
+                "TRANSACTIONS",
+                "PAYMENT_TO",
+                "PAYMENT_FROM",
+                "TRANSFER_TO",
+                "TRANSFER_FROM"
+            ],
+            "balance": {
+                "currency": "NZD",
+                "current": 227.3,
+                "available": 227.3,
+                "overdrawn": false
+            },
+            "meta": {
+                "holder": "MR N L FARROW"
+            },
+            "refreshed": {
+                "balance": "2025-11-29T03:46:38.587Z",
+                "meta": "2025-11-29T03:46:38.587Z",
+                "transactions": "2025-11-29T03:46:42.005Z",
+                "party": "2025-11-09T05:46:24.205Z"
+            },
+            "date_first_loaded": "2025-11-29T19:13:59.169323"
+        }
+    },
+    "actual_accounts": {
+        "9cd5915b-0ba1-45e9-ba08-1d7ff5a339b4": {
+            "subtype": null,
+            "bank_id": null,
+            "last_reconciled": null,
+            "account_id": null,
+            "offbudget": 0,
+            "name": "Personal",
+            "closed": 0,
+            "balance_current": null,
+            "tombstone": 0,
+            "balance_available": null,
+            "sort_order": 16384.0,
+            "balance_limit": null,
+            "type": null,
+            "mask": null,
+            "account_sync_source": null,
+            "id": "9cd5915b-0ba1-45e9-ba08-1d7ff5a339b4",
+            "official_name": null,
+            "last_sync": null,
+            "date_first_loaded": "2025-11-29T19:13:59.169336"
+        },
+        "f5588a81-636d-413c-a56a-ea1a5f503d46": {
+            "subtype": null,
+            "bank_id": null,
+            "last_reconciled": null,
+            "account_id": null,
+            "offbudget": 0,
+            "name": "Goal savings",
+            "closed": 0,
+            "balance_current": null,
+            "tombstone": 0,
+            "balance_available": null,
+            "sort_order": 32768.0,
+            "balance_limit": null,
+            "type": null,
+            "mask": null,
+            "account_sync_source": null,
+            "id": "f5588a81-636d-413c-a56a-ea1a5f503d46",
+            "official_name": null,
+            "last_sync": null,
+            "date_first_loaded": "2025-11-29T19:13:59.169336"
+        },
+        "b9d8babe-78ac-43b5-af34-55015b4541f8": {
+            "subtype": null,
+            "bank_id": null,
+            "last_reconciled": null,
+            "account_id": null,
+            "offbudget": 0,
+            "name": "Emergency savings",
+            "closed": 0,
+            "balance_current": null,
+            "tombstone": 0,
+            "balance_available": null,
+            "sort_order": 49152.0,
+            "balance_limit": null,
+            "type": null,
+            "mask": null,
+            "account_sync_source": null,
+            "id": "b9d8babe-78ac-43b5-af34-55015b4541f8",
+            "official_name": null,
+            "last_sync": null,
+            "date_first_loaded": "2025-11-29T19:13:59.169336"
+        }
+    },
+    "ynab_accounts": {},
+    "mapping": {
+        "acc_cmboqdbat000408l1crwahx9i": {
+            "actual_account_id": "b9d8babe-78ac-43b5-af34-55015b4541f8",
+            "actual_account_name": "Emergency savings",
+            "akahu_id": "acc_cmboqdbat000408l1crwahx9i",
+            "akahu_name": "Emergency savings",
+            "actual_matched_date": "2025-11-29T19:14:11.383148",
+            "actual_budget_id": "fb672c0f-f2f4-4ad0-9079-0a9efbb72e41",
+            "ynab_budget_id": null,
+            "account_type": "On Budget"
+        },
+        "acc_cmboqdbat000508l14eos78wg": {
+            "actual_account_id": "f5588a81-636d-413c-a56a-ea1a5f503d46",
+            "actual_account_name": "Goal savings",
+            "akahu_id": "acc_cmboqdbat000508l14eos78wg",
+            "akahu_name": "Goal savings",
+            "actual_matched_date": "2025-11-29T19:14:17.451376",
+            "actual_budget_id": "fb672c0f-f2f4-4ad0-9079-0a9efbb72e41",
+            "ynab_budget_id": null,
+            "account_type": "On Budget"
+        },
+        "acc_cmboqdbar000308l1hfja9drt": {
+            "actual_account_id": "9cd5915b-0ba1-45e9-ba08-1d7ff5a339b4",
+            "actual_account_name": "Personal",
+            "akahu_id": "acc_cmboqdbar000308l1hfja9drt",
+            "akahu_name": "Personal",
+            "actual_matched_date": "2025-11-29T19:14:21.065196",
+            "actual_budget_id": "fb672c0f-f2f4-4ad0-9079-0a9efbb72e41",
+            "ynab_budget_id": null,
+            "account_type": "On Budget"
+        }
+    }
+}
