@@ -1,1 +1,1 @@
-web: python -m uvicorn akahu_to_budget.app:app --host 0.0.0.0 --port $PORT
+web: gunicorn akahu_to_budget.app:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
