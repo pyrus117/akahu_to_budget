@@ -1,1 +1,1 @@
-web: gunicorn app:app -k uvicorn.workers.UvicornWorker --chdir akahu_to_budget --bind 0.0.0.0:$PORT 3
+web: sh -c "cd akahu_to_budget && uvicorn app:app --host 0.0.0.0 --port $PORT"
