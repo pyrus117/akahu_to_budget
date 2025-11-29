@@ -11,8 +11,9 @@ import argparse
 import signal
 import sys
 import requests
+from datetime import datetime # NEW IMPORT: Added for scheduler start_date
 from actual import Actual
-from apscheduler.schedulers.background import BackgroundScheduler # NEW IMPORT
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # Import from our modules package
 from modules.sync_handler import sync_to_ab, sync_to_ynab
@@ -80,28 +81,25 @@ signal.signal(signal.SIGTERM, signal_handler)  # Handle kill
 scheduler = None
 
 def start_scheduler():
-    """Initializes and starts the APScheduler for periodic sync."""
+    """Initializes and starts the APScheduler for periodic sync.
+    The job is configured to run immediately and then every 4 hours."""
     global scheduler
     logging.info("Initializing APScheduler for 4-hourly polling sync.")
     scheduler = BackgroundScheduler()
     
-    # Schedule the run_sync function to run every 4 hours
+    # Schedule the run_sync function to run immediately (start_date=datetime.now())
+    # and then repeat every 4 hours (trigger='interval', hours=4).
     scheduler.add_job(
         func=run_sync, 
         trigger='interval', 
         hours=4,
-        misfire_grace_time=600, # Allow 10 minutes for startup/misfire
+        start_date=datetime.now(), # FIX: Starts the job immediately upon scheduler startup
+        misfire_grace_time=600, 
         max_instances=1,
         id='akahu_polling_sync'
     )
     
-    # Run a sync immediately upon starting the scheduler
-    scheduler.add_job(
-        func=run_sync,
-        trigger='date',
-        run_date='now',
-        id='akahu_initial_sync'
-    )
+    # Removed the second job that used run_date='now' to fix the ValueError.
     
     scheduler.start()
     logging.info("Polling scheduler started. Sync runs now and every 4 hours.")
