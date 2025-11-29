@@ -39,7 +39,7 @@ from modules.config import RUN_SYNC_TO_YNAB, RUN_SYNC_TO_AB
 
 
 # Load environment variables from the parent directory's .env file
-# FIX: Corrected the syntax error (unmatched ')')
+# FIX: Corrected the SyntaxError on this line by ensuring proper use of pathlib.Path
 load_dotenv(dotenv_path=pathlib.Path(__file__).parent / '.env')
 
 DEBUG = False
