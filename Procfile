@@ -1,1 +1,1 @@
-web: sh -c "export PYTHONPATH=$PWD && python -m uvicorn akahu_to_budget.app:app --host 0.0.0.0 --port $PORT"
+web: python flask_app.py
