@@ -1,1 +1,1 @@
-web: python -m akahu_to_budget
+web: akahu_to_budget
