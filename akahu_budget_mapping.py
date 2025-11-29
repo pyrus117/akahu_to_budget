@@ -58,7 +58,6 @@ if RUN_SYNC_TO_AB:
     required_envs.extend([
         'ACTUAL_SERVER_URL',
         'ACTUAL_PASSWORD',
-        'ACTUAL_ENCRYPTION_KEY',
         'ACTUAL_SYNC_ID',
     ])
 
