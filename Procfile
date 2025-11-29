@@ -1,1 +1,1 @@
-web: sh -c "export PYTHONPATH=$PYTHONPATH:/app && gunicorn akahu_to_budget.app:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+web: gunicorn app:app -k uvicorn.workers.UvicornWorker --chdir akahu_to_budget --bind 0.0.0.0:$PORT 3
