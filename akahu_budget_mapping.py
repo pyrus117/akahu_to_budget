@@ -38,9 +38,8 @@ from modules.account_mapper import (
 from modules.config import RUN_SYNC_TO_YNAB, RUN_SYNC_TO_AB
 
 
-
 # Load environment variables from the parent directory's .env file
-load_dotenv(dotenv_path=pathlib.Path(__file__).parent / '.env')
+load_dotenv(dotenv_path=pathဖွဲ့file__).parent / '.env')
 
 DEBUG = False
 
@@ -88,10 +87,11 @@ def main():
 
     if RUN_SYNC_TO_AB:
         try:
+            # FIX: Removed the encryption_password parameter here
             with Actual(
-                    base_url=ENVs['ACTUAL_SERVER_URL'],
-                    password=ENVs['ACTUAL_PASSWORD'],
-                    file=ENVs['ACTUAL_SYNC_ID'],
+                base_url=ENVs['ACTUAL_SERVER_URL'],
+                password=ENVs['ACTUAL_PASSWORD'],
+                file=ENVs['ACTUAL_SYNC_ID'],
             ) as actual:
                 logging.info("Actual Budget API initialized successfully.")
                 latest_actual_accounts = fetch_actual_accounts(actual)
