@@ -1,6 +1,7 @@
 """
 Script for syncing transactions from Akahu to YNAB and Actual Budget.
 Also provides webhook endpoints for real-time transaction syncing.
+Updated to use APScheduler for 4-hourly polling instead of webhooks.
 """
 
 from contextlib import contextmanager
@@ -11,6 +12,7 @@ import signal
 import sys
 import requests
 from actual import Actual
+from apscheduler.schedulers.background import BackgroundScheduler # NEW IMPORT
 
 # Import from our modules package
 from modules.sync_handler import sync_to_ab, sync_to_ynab
@@ -41,6 +43,7 @@ def get_actual_client():
         try:
             logging.info(f"Attempting to connect to Actual server at {ENVs['ACTUAL_SERVER_URL']}")
             
+            # NOTE: This is where the decryption happens using the ACTUAL_ENCRYPTION_KEY
             with Actual(
                 base_url=ENVs['ACTUAL_SERVER_URL'],
                 password=ENVs['ACTUAL_PASSWORD'],
@@ -62,15 +65,55 @@ def get_actual_client():
 # Create and export the Flask app for WSGI
 def signal_handler(sig, frame):
     logging.info("Received signal to terminate. Shutting down gracefully...")
+    # Attempt to shut down the scheduler if it's running
+    try:
+        if 'scheduler' in globals() and scheduler.running:
+            scheduler.shutdown(wait=False)
+    except NameError:
+        pass # Scheduler was not initialized
     sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)  # Handle Ctrl+C
 signal.signal(signal.SIGTERM, signal_handler)  # Handle kill
 
+# Global variable to hold the scheduler instance (for access in signal_handler)
+scheduler = None
+
+def start_scheduler():
+    """Initializes and starts the APScheduler for periodic sync."""
+    global scheduler
+    logging.info("Initializing APScheduler for 4-hourly polling sync.")
+    scheduler = BackgroundScheduler()
+    
+    # Schedule the run_sync function to run every 4 hours
+    scheduler.add_job(
+        func=run_sync, 
+        trigger='interval', 
+        hours=4,
+        misfire_grace_time=600, # Allow 10 minutes for startup/misfire
+        max_instances=1,
+        id='akahu_polling_sync'
+    )
+    
+    # Run a sync immediately upon starting the scheduler
+    scheduler.add_job(
+        func=run_sync,
+        trigger='date',
+        run_date='now',
+        id='akahu_initial_sync'
+    )
+    
+    scheduler.start()
+    logging.info("Polling scheduler started. Sync runs now and every 4 hours.")
+
+
 def create_application():
     """Create Flask application."""
     _, _, _, mapping_list = load_existing_mapping()
     
+    # NOTE: The actual_client yielded here is short-lived as the context manager exits.
+    # The webhook handler must not rely on it being persistently connected.
+    # The scheduled job (run_sync) handles its own connection.
     with get_actual_client() as actual_client:
         app = create_flask_app(actual_client, mapping_list, {
             'AKAHU_PUBLIC_KEY': os.getenv('AKAHU_PUBLIC_KEY', ''),  # RFU (Reserved For Future Use)
@@ -87,7 +130,7 @@ def run_sync(account_ids=None, debug_mode=None):
         account_ids (list[str], optional): List of Akahu account IDs to sync. If None, all accounts will be synced.
         debug_mode (str, optional): Debug mode setting. 'all' to print all transaction IDs, or a specific Akahu transaction ID for verbose debugging.
     """
-    logging.info("Starting direct sync...")
+    logging.info("Starting direct sync (Scheduled Polling Job)...")
     actual_count = ynab_count = 0
 
     _, _, _, mapping_list = load_existing_mapping()
@@ -127,9 +170,14 @@ if __name__ == "__main__":
         account_ids = args.accounts.split(',') if args.accounts else None
         run_sync(account_ids, debug_mode=args.debug)
     else:
+        # 1. Start the polling scheduler
+        start_scheduler()
+        
+        # 2. Create and run the Flask application (for the status/manual sync endpoints)
         application = create_application()
         development_mode = os.getenv('FLASK_ENV') == 'development'
         application.run(host="0.0.0.0", port=5000, debug=development_mode)
 else:
-    # For WSGI deployment, create the application
+    # For WSGI deployment, create the application and start the scheduler
+    start_scheduler()
     application = create_application()
