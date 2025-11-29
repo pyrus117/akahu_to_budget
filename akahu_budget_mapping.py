@@ -92,7 +92,6 @@ def main():
                     base_url=ENVs['ACTUAL_SERVER_URL'],
                     password=ENVs['ACTUAL_PASSWORD'],
                     file=ENVs['ACTUAL_SYNC_ID'],
-                    encryption_password=ENVs['ACTUAL_ENCRYPTION_KEY']
             ) as actual:
                 logging.info("Actual Budget API initialized successfully.")
                 latest_actual_accounts = fetch_actual_accounts(actual)
