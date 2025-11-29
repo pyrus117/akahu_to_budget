@@ -1,1 +1,1 @@
-web: gunicorn app:app -k uvicorn.workers.UvicornWorker --chdir akahu_to_budget --bind 0.0.0.0:$PORT
+web: sh -c "export PYTHONPATH=$PWD && python -m uvicorn akahu_to_budget.app:app --host 0.0.0.0 --port $PORT"
