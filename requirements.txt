@@ -9,4 +9,6 @@ cryptography
 python-Levenshtein
 gunicorn
 uvicorn
-.
+fastapi
+httpx
+dataclass-json
