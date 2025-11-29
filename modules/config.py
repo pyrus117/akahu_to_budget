@@ -12,7 +12,6 @@ load_dotenv(verbose=True, override=True)
 required_envs = [
     "ACTUAL_SERVER_URL",
     "ACTUAL_PASSWORD",
-    "ACTUAL_ENCRYPTION_KEY",
     "ACTUAL_SYNC_ID",
     "AKAHU_USER_TOKEN",
     "AKAHU_APP_TOKEN",
